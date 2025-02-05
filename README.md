@@ -214,7 +214,7 @@ Sample output #1
 Sample input #2
 ```aiignore
 上海/上海虹桥-长春/长春西+v*GZ
-# 表示查询了北京到上海的G和Z字头列车，并且按速度排序
+# 表示查询了上海到长春的G和Z字头列车，并且按速度排序
 ```
 Sample output #2
 ```aiignore
