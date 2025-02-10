@@ -2,7 +2,7 @@
 
 一个简易的12306网站时刻表爬取、处理和离线查询工具
 
-_**Love the rhythm of rails.**_
+_**Love the rhythm of rails, love the veins of the world.**_
 
 ## 1 联网导入
 
