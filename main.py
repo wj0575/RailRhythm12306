@@ -1,4 +1,4 @@
-# 根据车次号查询火车时刻
+# Rail Rhythm 中国铁路时刻表查询工具
 # wj_0575 2025.1
 from threading import Thread
 
