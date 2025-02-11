@@ -4,7 +4,6 @@ import os.path
 
 import requests
 import json
-import re
 
 from datetime import datetime
 current_date = datetime.now()
@@ -383,18 +382,17 @@ while s != "exit":
         continue
     if s.lower() == "city_station":
         while True:
-            new = input("City name:")
-            if new == "save":
+            new = input("City name: ")
+            if new == "save" or new == "exit":
                 break
             station_name = ""
             city_station[new] = []
-            n = input("Station name:")
+            n = input("Station name: ")
             while n != "0" and n.lower() != "end":
                 city_station[new].append(n)
+                n = input("Station name: ")
         with open('city_station.json', 'w') as f1:
             json.dump(city_station, f1)
-        for i, j in city_station:
-            print(i, j)
         print("City stations data save over")
         continue
     if s.lower() == "time" or s.lower() == "date":
@@ -457,7 +455,7 @@ while s != "exit":
             trace_code -= 1
             print("Instruction grammar error")
             continue
-        st, ed = s.split("-")
+        st, ed = s.split("--")
         if "+" in ed:
             ed, add = s.split("+")
         if st in city_station and ed in city_station:
