@@ -1,5 +1,6 @@
 # Rail Rhythm 中国铁路时刻表查询工具
 # wj_0575 2025.1
+import os.path
 
 import requests
 import json
@@ -154,7 +155,6 @@ def search_station(x, t1='00:00', t2='24:00', sort_order = "", prefix = "GDCKTZS
     if "1" in tail:
         print("DN", end=' ')
     print(" ")
-    callback
     return callback
 
 def search_link(st, ed, sort_order = "st", prefix = "GDCKTZSYP"):
@@ -327,11 +327,16 @@ def count_code():
         print(i, ":", cnt[i])
 
 s = ""
-callback = {}
-trace = {}
+callback = {} # 跳转数据
+trace = {} # 回溯数据
 trace_code = 0
 trace_max = 0
+city_station = {} # 同城车站数据
+
 print("Welcome to the Rail Rhythm railway timetable query tool")
+if os.path.exists('city_station.json'):
+    with open('city_station.json', 'r') as f1:
+        city_station = json.load(f1)
 print("Current date setting:", auto_date)
 while s != "exit":
     s = input("Input instruction: ")
@@ -367,11 +372,30 @@ while s != "exit":
         print("Save over")
         continue
     if s.lower() == "load":
-        with open('train_list' + auto_date_1 + '.json', 'r') as f1:
-            train_list = json.load(f1)
-        with open('no_list' + auto_date_1 + '.json', 'r') as f2:
-            no_list = json.load(f2)
-        print("Load over")
+        if os.path.exists('train_list' + auto_date_1 + '.json') and os.path.exists('no_list' + auto_date_1 + '.json'):
+            with open('train_list' + auto_date_1 + '.json', 'r') as f1:
+                train_list = json.load(f1)
+            with open('no_list' + auto_date_1 + '.json', 'r') as f2:
+                no_list = json.load(f2)
+            print("Load over")
+        else:
+            print("File not exist, load fail")
+        continue
+    if s.lower() == "city_station":
+        while True:
+            new = input("City name:")
+            if new == "save":
+                break
+            station_name = ""
+            city_station[new] = []
+            n = input("Station name:")
+            while n != "0" and n.lower() != "end":
+                city_station[new].append(n)
+        with open('city_station.json', 'w') as f1:
+            json.dump(city_station, f1)
+        for i, j in city_station:
+            print(i, j)
+        print("City stations data save over")
         continue
     if s.lower() == "time" or s.lower() == "date":
         print("Current date setting:" ,auto_date)
@@ -428,8 +452,26 @@ while s != "exit":
         else:
             callback = search_station(target, prefix = r)
         continue
+    if "--" in s:
+        if s.count('-') > 2:
+            trace_code -= 1
+            print("Instruction grammar error")
+            continue
+        st, ed = s.split("-")
+        if "+" in ed:
+            ed, add = s.split("+")
+        if st in city_station and ed in city_station:
+            s = ""
+            for sta in city_station[st]:
+                s = s + "/" + sta
+            s = s + "-"
+            for sta in city_station[ed]:
+                s= s + sta + "/"
+            s = s[1:-1]
+        if "+" in ed:
+            s = s + "+" + add
     if "-" in s:
-        if(s.count('-') > 1):
+        if s.count('-') > 1:
             trace_code -= 1
             print("Instruction grammar error")
             continue

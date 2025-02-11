@@ -1,8 +1,10 @@
 # Rail Rhythm 中国铁路时刻表查询工具
 
-一个简易的12306网站时刻表爬取、处理和离线查询工具
+######  一个简易的12306网站时刻表爬取、处理和离线查询工具
 
-_**Love the rhythm of rails, love the veins of the world.**_
+作为一名编程新手的项目，这个工具的内容正在不断充实之中，欢迎提出Issue，同时也非常期待您的Star。
+
+###### _**Love the rhythm of rails, love the veins of the world.**_
 
 ## 1 联网导入
 
