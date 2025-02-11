@@ -11,7 +11,7 @@ _**Love the rhythm of rails, love the veins of the world.**_
 
 因为12306的系统特性，进度条的前10%会特别慢，可能会占到全部耗时的一半，请耐心等待。
 
-联网导入时，请勿开启网络代理服务。
+联网导入时，开启网络代理服务可能会导致异常的中断，原因不明。
 
 Sample input #1
 ```aiignore
