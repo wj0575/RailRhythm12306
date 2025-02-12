@@ -364,21 +364,22 @@ while s != "exit":
                 print(len(train_list), "train numbers in total")
         continue
     if s.lower() == "save":
-        with open('train_list' + auto_date_1 + '.json', 'w') as f1:
+        with open('train_data/train_list' + auto_date_1 + '.json', 'w') as f1:
             json.dump(train_list, f1)
-        with open('no_list' + auto_date_1 + '.json', 'w') as f2:
+        with open('train_data/no_list' + auto_date_1 + '.json', 'w') as f2:
             json.dump(no_list, f2)
         print("Save over")
         continue
     if s.lower() == "load":
-        if os.path.exists('train_list' + auto_date_1 + '.json') and os.path.exists('no_list' + auto_date_1 + '.json'):
-            with open('train_list' + auto_date_1 + '.json', 'r') as f1:
+        if (os.path.exists('train_data/train_list' + auto_date_1 + '.json') and
+                os.path.exists('train_data/no_list' + auto_date_1 + '.json')):
+            with open('train_data/train_list' + auto_date_1 + '.json', 'r') as f1:
                 train_list = json.load(f1)
-            with open('no_list' + auto_date_1 + '.json', 'r') as f2:
+            with open('train_data/no_list' + auto_date_1 + '.json', 'r') as f2:
                 no_list = json.load(f2)
             print("Load over")
         else:
-            print("File not exist, load fail")
+            print("File is not exist, load fail")
         continue
     if s.lower() == "city_station":
         while True:
