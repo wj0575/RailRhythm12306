@@ -90,7 +90,7 @@ Input time setting (xxxx-xx-xx) : 2025-02-05
 Input instruction: load
 Load over
 # 以下是数据总览操作
-Sum
+Input instruction: Sum
 Train sum: 17525
 G : 6451
 D : 3851
