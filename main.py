@@ -456,17 +456,24 @@ while s != "exit":
             print("Instruction grammar error")
             continue
         st, ed = s.split("--")
+        add = ""
         if "+" in ed:
-            ed, add = s.split("+")
-        if st in city_station and ed in city_station:
-            s = ""
+            ed, add = ed.split("+")
+        s = ""
+        if st in city_station:
             for sta in city_station[st]:
                 s = s + "/" + sta
-            s = s + "-"
+            s = s[1:]
+        else:
+            s = st
+        s = s + "-"
+        if ed in city_station:
             for sta in city_station[ed]:
-                s= s + sta + "/"
-            s = s[1:-1]
-        if "+" in ed:
+                s = s + sta + "/"
+            s = s[0:-1]
+        else:
+            s = s + ed
+        if add != "":
             s = s + "+" + add
     if "-" in s:
         if s.count('-') > 1:
